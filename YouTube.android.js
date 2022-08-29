@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ReactNative, {
   View,
-  ViewPropTypes,
   Text,
   StyleSheet,
   requireNativeComponent,
@@ -10,6 +9,7 @@ import ReactNative, {
   NativeModules,
   BackHandler,
 } from 'react-native';
+import {ViewPropTypes} from 'deprecated-react-native-prop-types';
 
 const RCTYouTube = requireNativeComponent('ReactYouTube', YouTube, {
   nativeOnly: {
@@ -69,7 +69,7 @@ export default class YouTube extends React.Component {
   componentDidUpdate(prevProps) {
     // Translate next `fullscreen` prop to state
     if (prevProps.fullscreen !== this.props.fullscreen) {
-      this.setState({ fullscreen: this.props.fullscreen });
+      this.setState({fullscreen: this.props.fullscreen});
     }
   }
 
@@ -89,7 +89,7 @@ export default class YouTube extends React.Component {
     let wait = 0.2;
 
     const next = () => {
-      this.setState((state) => ({ resizingHackFlag: !state.resizingHackFlag }));
+      this.setState((state) => ({resizingHackFlag: !state.resizingHackFlag}));
 
       wait = wait >= 1.5 ? 1.5 : wait * 1.4;
       this._timeout = setTimeout(next, wait * 1000);
@@ -100,7 +100,7 @@ export default class YouTube extends React.Component {
 
   _backPress = () => {
     if (this.state.fullscreen) {
-      this.setState({ fullscreen: false });
+      this.setState({fullscreen: false});
 
       return true;
     }
@@ -141,9 +141,9 @@ export default class YouTube extends React.Component {
   };
 
   _onChangeFullscreen = (event) => {
-    const { isFullscreen } = event.nativeEvent;
+    const {isFullscreen} = event.nativeEvent;
     if (this.state.fullscreen !== isFullscreen) {
-      this.setState({ fullscreen: isFullscreen });
+      this.setState({fullscreen: isFullscreen});
     }
 
     if (this.props.onChangeFullscreen) {
@@ -207,7 +207,7 @@ export default class YouTube extends React.Component {
           fullscreen={this.state.fullscreen}
           style={[
             styles.module,
-            { marginRight: this.state.resizingHackFlag ? StyleSheet.hairlineWidth : 0 },
+            {marginRight: this.state.resizingHackFlag ? StyleSheet.hairlineWidth : 0},
           ]}
           onYouTubeError={this._onError}
           onYouTubeReady={this._onReady}
